@@ -83,8 +83,6 @@ async function DelayCresX7(sock, jid) {
   await sock.relayMessage(jid, msg, { participant: { jid: jid } })
 }
 
-
-
 try {
   await DelayCresX7(sock, jid);
 } catch {}
