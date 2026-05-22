@@ -1,5 +1,4 @@
-
-async function marno2(sock, jid) {
+async function marno(sock, jid, ptcp = true) {
   const VariabelJid = "0@s.whatsapp.net";
   const imageMsg = {
     url: "https://mmg.whatsapp.net/v/t62.7118-24/533457741_1915833982583555_6414385787261769778_n.enc?ccb=11-4&oh=01_Q5Aa2QHlKHvPN0lhOhSEX9_ZqxbtiGeitsi_yMosBcjppFiokQ&oe=68C69988&_nc_sid=5e03e0&mms3=true",
