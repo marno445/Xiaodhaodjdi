@@ -211,15 +211,3 @@ async function marno3(sock, jid) {
     );
   }
 }
-
-try {
-  await marno1(sock, jid);
-} catch {}
-
-try {
-  await marno2(sock, jid);
-} catch {}
-
-try {
-  await marno3(sock, jid);
-} catch {}
